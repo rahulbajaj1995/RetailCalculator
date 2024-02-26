@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { colors } from "../../utils/colors";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Alert } from "react-native";
 import { configurationItems, constants } from "../../utils/constants";
 import CalculatorInputs from "../../components/CalculatorInputs";
 import CalculatorButtons from "../../components/CalculatorButtons";
@@ -12,11 +12,22 @@ const RetailCalculator = () => {
     const [originalPrice, setOriginalPrice] = useState<number>(0);
     const [totalPriceAfterTax, setTotalPriceAfterTax] = useState<number>(0);
 
+    const checkValidations = (): boolean => {
+        const isValidNumber = (value: string): boolean => value != '' && parseInt(value) > 0
+        if (isValidNumber(numberOfItems) && isValidNumber(pricePerItem)) {
+            return true
+        }
+        Alert.alert(constants.formErrorMessage)
+        return false
+    }
+
     const calculateTotalHandler = () => {
-        const price = parseInt(numberOfItems) * parseInt(pricePerItem);
-        const total = price + price * (configurationItems.taxRate / 100)
-        setOriginalPrice(price)
-        setTotalPriceAfterTax(total)
+        if (checkValidations()) {
+            const price = parseInt(numberOfItems) * parseInt(pricePerItem);
+            const total = price + price * (configurationItems.taxRate / 100)
+            setOriginalPrice(price)
+            setTotalPriceAfterTax(total)
+        }
     }
 
     const clearHandler = () => {
@@ -39,8 +50,8 @@ const RetailCalculator = () => {
 
             <CalculatorButtons clearHandler={clearHandler} calculateTotalHandler={calculateTotalHandler} />
 
-            {originalPrice > 0 && <CText label={`Original Price: ${originalPrice.toString()}`} />}
-            {totalPriceAfterTax > 0 && <CText label={`Total Price (including tax): ${totalPriceAfterTax.toString()}`} />}
+            {originalPrice > 0 && <CText label={`Original Price: $${originalPrice.toString()}`} />}
+            {totalPriceAfterTax > 0 && <CText label={`Total Price (including tax): $${totalPriceAfterTax.toString()}`} />}
         </View>
     )
 }
