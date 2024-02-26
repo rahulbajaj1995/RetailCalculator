@@ -1,16 +1,30 @@
 import React, { useState } from "react";
 import { colors } from "../../utils/colors";
 import { Text, View, StyleSheet } from "react-native";
-import { constants } from "../../utils/constants";
+import { configurationItems, constants } from "../../utils/constants";
 import CalculatorInputs from "../../components/CalculatorInputs";
 import CalculatorButtons from "../../components/CalculatorButtons";
+import CText from "../../components/CText";
 
 const RetailCalculator = () => {
     const [numberOfItems, setNumberOfItems] = useState<string>('');
     const [pricePerItem, setPricePerItem] = useState<string>('');
+    const [originalPrice, setOriginalPrice] = useState<number>(0);
+    const [totalPriceAfterTax, setTotalPriceAfterTax] = useState<number>(0);
 
-    const calculateTotalHandler = () => { }
-    const clearHandler = () => { }
+    const calculateTotalHandler = () => {
+        const price = parseInt(numberOfItems) * parseInt(pricePerItem);
+        const total = price + price * (configurationItems.taxRate / 100)
+        setOriginalPrice(price)
+        setTotalPriceAfterTax(total)
+    }
+
+    const clearHandler = () => {
+        setNumberOfItems('')
+        setPricePerItem('')
+        setOriginalPrice(0)
+        setTotalPriceAfterTax(0)
+    }
 
     return (
         <View style={styles.container}>
@@ -24,6 +38,9 @@ const RetailCalculator = () => {
             />
 
             <CalculatorButtons clearHandler={clearHandler} calculateTotalHandler={calculateTotalHandler} />
+
+            {originalPrice > 0 && <CText label={`Original Price: ${originalPrice.toString()}`} />}
+            {totalPriceAfterTax > 0 && <CText label={`Total Price (including tax): ${totalPriceAfterTax.toString()}`} />}
         </View>
     )
 }
