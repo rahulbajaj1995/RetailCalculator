@@ -5,3 +5,7 @@ export const constants = {
     calculateTotal: 'Calculate Total',
     clear: 'Clear',
 }
+
+export const configurationItems = {
+    taxRate: 6.85
+}
