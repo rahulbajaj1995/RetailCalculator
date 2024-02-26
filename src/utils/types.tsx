@@ -20,3 +20,9 @@ export interface CalculatorButtonsType {
     clearHandler: () => void;
     calculateTotalHandler: () => void
 }
+
+export interface PriceComponentType {
+    title: string;
+    value: string;
+    percentage?: string;
+}
