@@ -4,6 +4,7 @@ export const constants = {
     pricePerItem: 'Price Per Item',
     calculateTotal: 'Calculate Total',
     clear: 'Clear',
+    formErrorMessage: 'Please validate the form details',
 }
 
 export const configurationItems = {
