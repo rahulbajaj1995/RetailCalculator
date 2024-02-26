@@ -1,4 +1,4 @@
-import { RegionType } from "./types"
+import { DiscountType, RegionType } from "./types"
 
 export const constants = {
     title: 'Retail Calculator',
@@ -10,6 +10,7 @@ export const constants = {
     originalPrice: 'Original Price : ',
     totalPrice: 'Total Price : ',
     regionSelection: 'Region Type Selection',
+    discountedPrice: 'Discounted Price : ',
 }
 
 export const configurationItems = {
@@ -39,3 +40,11 @@ export const regions: RegionType[] = [
         taxRate: '8.25'
     }
 ]
+
+export const discountData: DiscountType[] = [
+    { amount: 50000, discount: 0.85, percentage: '15%' },
+    { amount: 10000, discount: 0.9, percentage: '10%' },
+    { amount: 7000, discount: 0.93, percentage: '7%' },
+    { amount: 5000, discount: 0.95, percentage: '5%' },
+    { amount: 1000, discount: 0.97, percentage: '3%' },
+];
