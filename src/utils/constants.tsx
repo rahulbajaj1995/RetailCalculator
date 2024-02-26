@@ -13,10 +13,6 @@ export const constants = {
     discountedPrice: 'Discounted Price : ',
 }
 
-export const configurationItems = {
-    taxRate: 6.85
-}
-
 export const regions: RegionType[] = [
     {
         id: 1,
