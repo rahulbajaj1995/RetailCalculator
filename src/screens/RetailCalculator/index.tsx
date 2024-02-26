@@ -17,7 +17,7 @@ const RetailCalculator = () => {
 
     const checkValidations = (): boolean => {
         const isValidNumber = (value: string): boolean => value != '' && parseInt(value) > 0
-        if (isValidNumber(numberOfItems) && isValidNumber(pricePerItem)) {
+        if (isValidNumber(numberOfItems) && isValidNumber(pricePerItem) && region != null) {
             return true
         }
         Alert.alert(constants.formErrorMessage)
@@ -27,7 +27,7 @@ const RetailCalculator = () => {
     const calculateTotalHandler = () => {
         if (checkValidations()) {
             const price = parseInt(numberOfItems) * parseInt(pricePerItem);
-            const total = price + price * (configurationItems.taxRate / 100)
+            const total = price + price * (Number(region?.taxRate) / 100)
             setOriginalPrice(price)
             setTotalPriceAfterTax(total)
         }
@@ -38,6 +38,7 @@ const RetailCalculator = () => {
         setPricePerItem('')
         setOriginalPrice(0)
         setTotalPriceAfterTax(0)
+        setRegion(null)
     }
 
     const regionClickHandler = (item: RegionType) => {
@@ -64,7 +65,7 @@ const RetailCalculator = () => {
             {totalPriceAfterTax > 0 &&
                 <>
                     <PriceComponent title={constants.originalPrice} value={originalPrice.toString()} />
-                    <PriceComponent title={constants.totalPrice} value={totalPriceAfterTax.toFixed(2).toString()} percentage={` (with ${configurationItems.taxRate}% tax)`} />
+                    <PriceComponent title={constants.totalPrice} value={totalPriceAfterTax.toFixed(2).toString()} percentage={` (with ${region?.taxRate}% tax)`} />
                 </>
             }
         </View>
