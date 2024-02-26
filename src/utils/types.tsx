@@ -54,3 +54,16 @@ export interface DiscountValueType {
     discountedPrice: number;
     percentage: string;
 }
+
+export interface CalculateTotalType {
+    numberOfItems: string;
+    pricePerItem: string;
+    region: RegionType;
+}
+
+export interface PriceType {
+    originalPrice: number;
+    discountedPrice: number;
+    totalAfterTax: number;
+    percentage: string;
+}
