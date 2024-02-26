@@ -8,6 +8,7 @@ import { RegionItemType, RegionSelectionType } from "../../utils/types";
 const RegionItem = ({ item, onClickHandler, selectedRegion }: RegionItemType) => {
     return (
         <Pressable
+            testID={'regionItemId'}
             key={item.id}
             style={selectedRegion != null && selectedRegion.id == item.id ? styles.selectedButtonContainer : styles.buttonContainer}
             onPress={() => onClickHandler(item)}>
@@ -22,6 +23,7 @@ const RegionSelection = ({ onClickHandler, selectedRegion }: RegionSelectionType
             <CText label={constants.regionSelection} />
 
             <FlatList
+                testID={'regionListId'}
                 horizontal
                 data={regions}
                 contentContainerStyle={{ marginTop: 8 }}

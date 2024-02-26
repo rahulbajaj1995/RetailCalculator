@@ -3,21 +3,15 @@ describe('Example', () => {
     await device.launchApp();
   });
 
-  beforeEach(async () => {
-    await device.reloadReactNative();
-  });
+  it('should have Retail Calculator text', async () => {
+    await expect(element(by.id('retailCalculatorTitleId'))).toBeVisible()
+  })
 
-  it('should have welcome screen', async () => {
-    await expect(element(by.id('welcome'))).toBeVisible();
-  });
-
-  it('should show hello screen after tap', async () => {
-    await element(by.id('hello_button')).tap();
-    await expect(element(by.text('Hello!!!'))).toBeVisible();
-  });
-
-  it('should show world screen after tap', async () => {
-    await element(by.id('world_button')).tap();
-    await expect(element(by.text('World!!!'))).toBeVisible();
-  });
+  it('trigger a successful automated test case', async () => {
+    await element(by.id('numberOfItemsId')).typeText('123');
+    await element(by.id('pricePerItemId')).typeText('200');
+    await expect(element(by.id('regionListId'))).toBeVisible();
+    await element(by.id('regionItemId')).atIndex(1).tap();
+    await element(by.id('calculateButtonId')).tap();
+  })
 });
