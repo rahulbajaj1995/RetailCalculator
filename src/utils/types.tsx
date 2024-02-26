@@ -26,3 +26,20 @@ export interface PriceComponentType {
     value: string;
     percentage?: string;
 }
+
+export interface RegionType {
+    id: number;
+    region: string;
+    taxRate: string;
+}
+
+export interface RegionSelectionType {
+    onClickHandler: (RegionType: RegionType) => void;
+    selectedRegion: RegionType | null;
+}
+
+export interface RegionItemType {
+    item: RegionType;
+    onClickHandler: (RegionType: RegionType) => void;
+    selectedRegion: RegionType | null;
+}

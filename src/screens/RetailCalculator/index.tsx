@@ -5,12 +5,15 @@ import { configurationItems, constants } from "../../utils/constants";
 import CalculatorInputs from "../../components/CalculatorInputs";
 import CalculatorButtons from "../../components/CalculatorButtons";
 import PriceComponent from "../../components/PriceComponent";
+import RegionSelection from "../../components/RegionSelection";
+import { RegionType } from "../../utils/types";
 
 const RetailCalculator = () => {
     const [numberOfItems, setNumberOfItems] = useState<string>('');
     const [pricePerItem, setPricePerItem] = useState<string>('');
     const [originalPrice, setOriginalPrice] = useState<number>(0);
     const [totalPriceAfterTax, setTotalPriceAfterTax] = useState<number>(0);
+    const [region, setRegion] = useState<RegionType | null>(null);
 
     const checkValidations = (): boolean => {
         const isValidNumber = (value: string): boolean => value != '' && parseInt(value) > 0
@@ -37,6 +40,12 @@ const RetailCalculator = () => {
         setTotalPriceAfterTax(0)
     }
 
+    const regionClickHandler = (item: RegionType) => {
+        if (region != null)
+            clearHandler()
+        setRegion(item)
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{constants.title}</Text>
@@ -47,6 +56,8 @@ const RetailCalculator = () => {
                 setNumberOfItems={setNumberOfItems}
                 setPricePerItem={setPricePerItem}
             />
+
+            <RegionSelection onClickHandler={regionClickHandler} selectedRegion={region} />
 
             <CalculatorButtons clearHandler={clearHandler} calculateTotalHandler={calculateTotalHandler} />
 
