@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, Alert } from "react-native";
 import { configurationItems, constants } from "../../utils/constants";
 import CalculatorInputs from "../../components/CalculatorInputs";
 import CalculatorButtons from "../../components/CalculatorButtons";
-import CText from "../../components/CText";
+import PriceComponent from "../../components/PriceComponent";
 
 const RetailCalculator = () => {
     const [numberOfItems, setNumberOfItems] = useState<string>('');
@@ -50,8 +50,12 @@ const RetailCalculator = () => {
 
             <CalculatorButtons clearHandler={clearHandler} calculateTotalHandler={calculateTotalHandler} />
 
-            {originalPrice > 0 && <CText label={`Original Price: $${originalPrice.toString()}`} />}
-            {totalPriceAfterTax > 0 && <CText label={`Total Price (including tax): $${totalPriceAfterTax.toString()}`} />}
+            {totalPriceAfterTax > 0 &&
+                <>
+                    <PriceComponent title={constants.originalPrice} value={originalPrice.toString()} />
+                    <PriceComponent title={constants.totalPrice} value={totalPriceAfterTax.toFixed(2).toString()} percentage={` (with ${configurationItems.taxRate}% tax)`} />
+                </>
+            }
         </View>
     )
 }
