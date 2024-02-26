@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { colors } from "../../utils/colors";
 import { Text, View, StyleSheet, Pressable } from "react-native";
 import { constants } from "../../utils/constants";
-import CTextInput from "../../components/CTextInput";
+import CalculatorInputs from "../../components/CalculatorInputs";
 
 const RetailCalculator = () => {
     const [numberOfItems, setNumberOfItems] = useState<string>('');
@@ -12,24 +12,11 @@ const RetailCalculator = () => {
         <View style={styles.container}>
             <Text style={styles.title}>{constants.title}</Text>
 
-            <CTextInput
-                value={numberOfItems}
-                maxLength={3}
-                numberOfLines={1}
-                keyboardType="number-pad"
-                label={constants.numberOfItems}
-                placeholder={constants.numberOfItems}
-                onChangeText={setNumberOfItems}
-            />
-
-            <CTextInput
-                value={pricePerItem}
-                maxLength={5}
-                numberOfLines={1}
-                keyboardType="number-pad"
-                label={constants.pricePerItem}
-                placeholder={constants.pricePerItem}
-                onChangeText={setPricePerItem}
+            <CalculatorInputs
+                numberOfItems={numberOfItems}
+                pricePerItem={pricePerItem}
+                setNumberOfItems={setNumberOfItems}
+                setPricePerItem={setPricePerItem}
             />
 
             <View style={styles.buttonContainer}>
