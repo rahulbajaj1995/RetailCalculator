@@ -43,3 +43,14 @@ export interface RegionItemType {
     onClickHandler: (RegionType: RegionType) => void;
     selectedRegion: RegionType | null;
 }
+
+export interface DiscountType {
+    amount: number;
+    discount: number;
+    percentage: string;
+}
+
+export interface DiscountValueType {
+    discountedPrice: number;
+    percentage: string;
+}
