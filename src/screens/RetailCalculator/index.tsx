@@ -41,7 +41,7 @@ const RetailCalculator = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{constants.title}</Text>
+            <Text testID={'retailCalculatorTitleId'} style={styles.title}>{constants.title}</Text>
 
             <CalculatorInputs
                 numberOfItems={numberOfItems}

@@ -10,7 +10,7 @@ const CalculatorButtons = ({ clearHandler, calculateTotalHandler }: CalculatorBu
             <Pressable style={styles.clearButton} onPress={clearHandler}>
                 <Text style={[styles.title, { color: colors.primary }]}>{constants.clear}</Text>
             </Pressable>
-            <Pressable style={styles.calculateTotalButton} onPress={calculateTotalHandler}>
+            <Pressable testID={'calculateButtonId'} style={styles.calculateTotalButton} onPress={calculateTotalHandler}>
                 <Text style={[styles.title, { color: colors.white }]}>{constants.calculateTotal}</Text>
             </Pressable>
         </View>
