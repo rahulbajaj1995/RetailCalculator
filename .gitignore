@@ -66,3 +66,4 @@ yarn-error.log
 /coverage
 
 package-lock.json
+__tests__/__snapshots__
