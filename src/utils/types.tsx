@@ -15,3 +15,8 @@ export interface CalculateInputsType {
     setNumberOfItems: (value: string) => void;
     setPricePerItem: (value: string) => void;
 }
+
+export interface CalculatorButtonsType {
+    clearHandler: () => void;
+    calculateTotalHandler: () => void
+}
