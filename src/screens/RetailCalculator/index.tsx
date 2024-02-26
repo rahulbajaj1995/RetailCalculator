@@ -1,30 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { colors } from "../../utils/colors";
 import { Text, View, StyleSheet, Alert } from "react-native";
-import { constants } from "../../utils/constants";
+import { ActionTypes, constants } from "../../utils/constants";
 import CalculatorInputs from "../../components/CalculatorInputs";
 import CalculatorButtons from "../../components/CalculatorButtons";
 import PriceComponent from "../../components/PriceComponent";
 import RegionSelection from "../../components/RegionSelection";
 import { RegionType } from "../../utils/types";
 import useCalculateTotal from "../../hooks/useCalculatorTotalPrice";
+import { initialState, reducer } from "../../hooks/useLocalState";
 
 const RetailCalculator = () => {
     const [numberOfItems, setNumberOfItems] = useState<string>('');
     const [pricePerItem, setPricePerItem] = useState<string>('');
-    const [originalPrice, setOriginalPrice] = useState<number>(0);
-    const [totalPriceAfterTax, setTotalPriceAfterTax] = useState<number>(0);
-    const [discountedPrice, setDiscountedPrice] = useState<number>(0);
-    const [discountPercentage, setDiscountPercentage] = useState<string>('');
     const [region, setRegion] = useState<RegionType | null>(null);
+    const [state, dispatch] = useReducer(reducer, initialState);
+    const { originalPrice, discountedPrice, percentage: discountPercentage, totalAfterTax: totalPriceAfterTax } = state
 
     const calculateTotalHandler = () => {
         if (region != null) {
             const { originalPrice, discountedPrice, totalAfterTax, percentage } = useCalculateTotal({ numberOfItems, pricePerItem, region })
-            setOriginalPrice(originalPrice)
-            setTotalPriceAfterTax(totalAfterTax)
-            setDiscountedPrice(discountedPrice)
-            setDiscountPercentage(percentage)
+            dispatch({ type: ActionTypes.UPDATE_PRICE, payload: { originalPrice, discountedPrice, percentage, totalAfterTax } })
         } else {
             Alert.alert(constants.formErrorMessage)
         }
@@ -33,11 +29,8 @@ const RetailCalculator = () => {
     const clearHandler = () => {
         setNumberOfItems('')
         setPricePerItem('')
-        setOriginalPrice(0)
-        setTotalPriceAfterTax(0)
         setRegion(null)
-        setDiscountedPrice(0)
-        setDiscountPercentage('')
+        dispatch({ type: ActionTypes.UPDATE_PRICE, payload: { originalPrice: 0, discountedPrice: 0, percentage: '', totalAfterTax: 0 } })
     }
 
     const regionClickHandler = (item: RegionType) => {

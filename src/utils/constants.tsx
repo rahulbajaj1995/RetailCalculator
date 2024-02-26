@@ -44,3 +44,7 @@ export const discountData: DiscountType[] = [
     { amount: 5000, discount: 0.95, percentage: '5%' },
     { amount: 1000, discount: 0.97, percentage: '3%' },
 ];
+
+export const ActionTypes = {
+    UPDATE_PRICE: 'UPDATE_PRICE'
+}
