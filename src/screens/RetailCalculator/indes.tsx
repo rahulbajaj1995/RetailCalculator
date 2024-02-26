@@ -1,45 +1,29 @@
 import React, { useState } from "react";
 import { colors } from "../../utils/colors";
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import { constants } from "../../utils/constants";
-import CTextInput from "../../components/CTextInput";
+import CalculatorInputs from "../../components/CalculatorInputs";
+import CalculatorButtons from "../../components/CalculatorButtons";
 
 const RetailCalculator = () => {
     const [numberOfItems, setNumberOfItems] = useState<string>('');
     const [pricePerItem, setPricePerItem] = useState<string>('');
 
+    const calculateTotalHandler = () => { }
+    const clearHandler = () => { }
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{constants.title}</Text>
 
-            <CTextInput
-                value={numberOfItems}
-                maxLength={3}
-                numberOfLines={1}
-                keyboardType="number-pad"
-                label={constants.numberOfItems}
-                placeholder={constants.numberOfItems}
-                onChangeText={setNumberOfItems}
+            <CalculatorInputs
+                numberOfItems={numberOfItems}
+                pricePerItem={pricePerItem}
+                setNumberOfItems={setNumberOfItems}
+                setPricePerItem={setPricePerItem}
             />
 
-            <CTextInput
-                value={pricePerItem}
-                maxLength={5}
-                numberOfLines={1}
-                keyboardType="number-pad"
-                label={constants.pricePerItem}
-                placeholder={constants.pricePerItem}
-                onChangeText={setPricePerItem}
-            />
-
-            <View style={styles.buttonContainer}>
-                <Pressable style={styles.clearButton}>
-                    <Text style={[styles.title, { color: colors.primary }]}>{constants.clear}</Text>
-                </Pressable>
-                <Pressable style={styles.calculateTotalButton}>
-                    <Text style={[styles.title, { color: colors.white }]}>{constants.calculateTotal}</Text>
-                </Pressable>
-            </View>
+            <CalculatorButtons clearHandler={clearHandler} calculateTotalHandler={calculateTotalHandler} />
         </View>
     )
 }
@@ -49,7 +33,4 @@ export default RetailCalculator;
 const styles = StyleSheet.create({
     container: { padding: 8 },
     title: { fontSize: 16, color: colors.primary, fontWeight: '600', textAlign: 'center' },
-    buttonContainer: { flexDirection: 'row', marginBottom: 12 },
-    clearButton: { flex: 1, borderColor: colors.primary, borderWidth: 1, borderRadius: 8, padding: 8, marginRight: 8, marginTop: 8 },
-    calculateTotalButton: { flex: 1, borderColor: colors.primary, backgroundColor: colors.primary, borderWidth: 1, borderRadius: 8, padding: 8, marginRight: 8, marginTop: 8 },
 })
