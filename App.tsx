@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import RetailCalculator from './src/screens/RetailCalculator/indes';
+import RetailCalculator from './src/screens/RetailCalculator';
 
 const App = () => {
   return (

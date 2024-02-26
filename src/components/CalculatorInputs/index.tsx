@@ -7,6 +7,7 @@ const CalculatorInputs = ({ numberOfItems, pricePerItem, setNumberOfItems, setPr
     return (
         <>
             <CTextInput
+                testID={'numberOfItemsId'}
                 value={numberOfItems}
                 maxLength={3}
                 numberOfLines={1}
@@ -17,6 +18,7 @@ const CalculatorInputs = ({ numberOfItems, pricePerItem, setNumberOfItems, setPr
             />
 
             <CTextInput
+                testID={'pricePerItemId'}
                 value={pricePerItem}
                 maxLength={5}
                 numberOfLines={1}
